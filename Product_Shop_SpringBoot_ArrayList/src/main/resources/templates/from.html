@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Product</title>
+
+    <link rel="stylesheet" th:href="@{/css.css}"></head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1 th:text="${product.id == 0} ? 'Add Product' : 'Edit Product'"></h1>
+
+        <p class="subtitle"
+           th:text="${product.id == 0}
+       ? 'Enter product information below'
+       : 'Update product information below'">
+        </p>
+
+        <form th:object="${product}"
+              method="post"
+              th:action="${product.id == 0} ? @{/product/add} : @{/product/update}">
+
+            <div class="form-group">
+                <label>Product ID</label>
+                <input type="text" th:field="*{id}">
+                <span class="error" th:errors="*{id}"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Product Name</label>
+                <input type="text" th:field="*{name}">
+                <span class="error" th:errors="*{name}"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Category</label>
+                <input type="text" th:field="*{category}">
+                <span class="error" th:errors="*{category}"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Stock</label>
+                <input type="number" th:field="*{stock}">
+                <span class="error" th:errors="*{stock}"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Price</label>
+                <input type="number" step="0.01" th:field="*{price}">
+                <span class="error" th:errors="*{price}"></span>
+            </div>
+
+            <button type="submit"
+                    th:text="${product.id == 0} ? 'Add Product' : 'Update Product'">
+            </button>
+            <a th:href="@{/product/list}" class="back-btn">
+                ← Back to Product List
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
